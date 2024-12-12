@@ -4,4 +4,12 @@
   box-sizing: border-box;
 }
 
-  
+.glass-effect {
+  background: rgba(0, 163, 0, 0.5); /* Base color with transparency */
+  backdrop-filter: blur(10px); /* Glass blur effect */
+  border: 1px solid rgba(255, 255, 255, 0.3); /* Light border for the glass look */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow */
+  border-radius: 10px; /* Rounded corners for aesthetics */
+  padding: 20px; /* Space inside the element */
+  color: white; /* Text color for contrast */
+}

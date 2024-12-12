@@ -12,11 +12,11 @@ function Auth({ insideRegister }) {
     <>
       <div style={{ overflow: 'hidden' }}>
         <Row className='p-5 d-flex justify-content-center rounded'>
-          <div className='row border w-75 h-100 p-5 rounded' style={{ backgroundColor: '#8AFF8A', padding: '1%' }}>
-            <Col lg={6}>
-              <div style={{ height: '100%', width: '100%' }}> <img className='img-fluid' src={autherImg} alt="" /></div>
-            </Col>
-            <Col lg={6} className='border border-2 p-3'>
+          <div className='row border w-50 h-100  rounded glass-effect' style={{ padding: '1%' ,backgroundColor:''}}>
+            {/* <Col lg={6}>
+              <div style={{ height: '300px', width: '100%' }}> <img className='img-fluid' src={autherImg} alt="" /></div>
+            </Col> */}
+            <Col lg={6} className='border border-2 p-3 w-100 text-center align-items-center d-flex  flex-column '>
               <div>
                 <h2 style={{color:'#007500'}}>Project Fair</h2>
                 <h6 style={{color:'#007500'}}>Sign {insideRegister ? 'up' : 'in'} to your account</h6>
@@ -25,19 +25,19 @@ function Auth({ insideRegister }) {
               <form >
 
                 {insideRegister &&
-                  <FloatingLabel controlId="floatingInput" label="User Name" className="mb-3 w-75" style={{ fontSize: '14px' }}>
+                  <FloatingLabel controlId="floatingInput" label="User Name" className="mb-3 w-100" style={{ fontSize: '14px' }}>
                     <Form.Control type="email" placeholder="name@example.com" />
                   </FloatingLabel>}
 
 
 
-                <FloatingLabel controlId="floatingInput" label="Email Address" className="mb-3 w-75" style={{ fontSize: '14px' }}>
+                <FloatingLabel controlId="floatingInput" label="Email Address" className="mb-3 w-100" style={{ fontSize: '14px' }}>
                   <Form.Control type="email" placeholder="name@example.com" />
                 </FloatingLabel>
 
 
 
-                <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 w-75" style={{ fontSize: '14px' }}>
+                <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 w-100" style={{ fontSize: '14px' }}>
                   <Form.Control type="email" placeholder="name@example.com" />
                 </FloatingLabel>
 
@@ -45,7 +45,7 @@ function Auth({ insideRegister }) {
                 { 
                 insideRegister ?
                   <div >
-                  <Button className='btn btn-light text-center'>sing up</Button>
+                  <Button className='btn btn-success text-center'>sing up</Button>
                   <p>Already have an account ?
                     <span>
                       <Link to={'/login'}>Login</Link>
@@ -56,7 +56,7 @@ function Auth({ insideRegister }) {
                 :
 
                 <div style={{color:'#007500'}}>
-                  <Button className='btn btn-light text-center'>sing in</Button>
+                  <Button className='btn btn-success text-center'>sing in</Button>
                   <p>Don't have an account yet?
                     <span>
                       <Link style={{color:'#007500'}} to={'/register'}>Register</Link>
