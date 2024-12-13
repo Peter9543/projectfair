@@ -7,7 +7,7 @@ function Header() {
   return (
    <>
    <div>
-    <Container>
+    <div>
     <Navbar className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#home">
@@ -16,7 +16,7 @@ function Header() {
           </Navbar.Brand>
         </Container>
       </Navbar>
-    </Container>
+    </div>
    </div>
    </>
   )
