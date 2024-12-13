@@ -36,13 +36,13 @@ function Add() {
         </Modal.Header>
         <Modal.Body>
           <Row>
-            <Col lg={4}>
+            <Col lg={5}>
               <label >
                 <input type="file" style={{ display: 'none' }} />
-                <img src={img} alt="" />
+                <img style={{height:'320px'}} src={img} alt="" />
               </label>
             </Col>
-            <Col lg={8} className='p-2'>
+            <Col lg={7} className='p-2'>
               <form action="">
 
                 <FloatingLabel
@@ -92,7 +92,7 @@ function Add() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary">Understood</Button>
+          <Button variant="success">Understood</Button>
         </Modal.Footer>
       </Modal>
     </>

@@ -8,10 +8,10 @@ function Header() {
    <>
    <div>
     <div>
-    <Navbar className="bg-body-tertiary">
+    <Navbar className="bg-body-tertiary" >
         <Container>
           <Navbar.Brand href="#home">
-          <Link to={'/'}><i class="fa-brands fa-phoenix-squadron"></i></Link>
+          <Link to={'/'} className='text-danger'><i class="fa-brands fa-phoenix-squadron"></i></Link>
            Project Fair
           </Navbar.Brand>
         </Container>
