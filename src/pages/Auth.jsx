@@ -3,13 +3,25 @@ import { Button, Col, Container, Row } from 'react-bootstrap'
 import autherImg from '../assets/auther2.png'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';                        
+import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+
 
 
 
 function Auth({ insideRegister }) {
 
-  const [userDetails,setUserDetails]=useState({username:"",email:"",password:""})
+  const [userDetails, setUserDetails] = useState({ username: "", email: "", password: "" })
+
+  // sign up
+  const handleRegister = (e) => {
+    e.preventDefault()
+    if (userDetails.username && userDetails.email && userDetails.password) {
+      // api call
+    } else {
+      toast.warning("enter the field completely")
+    }
+  }
 
   return (
     <>
@@ -29,26 +41,26 @@ function Auth({ insideRegister }) {
 
                 {insideRegister &&
                   <FloatingLabel controlId="floatingInput" label="User Name" className="mb-3 w-100" style={{ fontSize: '14px' }}>
-                    <Form.Control type="email" placeholder="name@example.com" onChange={e=>setUserDetails({...userDetails,username:e.target.value})} />
+                    <Form.Control type="email" placeholder="name@example.com" onChange={e => setUserDetails({ ...userDetails, username: e.target.value })} />
                   </FloatingLabel>}
 
 
 
                 <FloatingLabel controlId="floatingInput" label="Email Address" className="mb-3 w-100" style={{ fontSize: '14px' }}>
-                  <Form.Control type="email" placeholder="name@example.com" onChange={e=>setUserDetails({...userDetails,email:e.target.value})}/>
+                  <Form.Control type="email" placeholder="name@example.com" onChange={e => setUserDetails({ ...userDetails, email: e.target.value })} />
                 </FloatingLabel>
 
 
 
                 <FloatingLabel controlId="floatingInput" label="Password" className="mb-3 w-100" style={{ fontSize: '14px' }}>
-                  <Form.Control type="email" placeholder="name@example.com" onChange={e=>setUserDetails({...userDetails,password:e.target.value})}/>
+                  <Form.Control type="email" placeholder="name@example.com" onChange={e => setUserDetails({ ...userDetails, password: e.target.value })} />
                 </FloatingLabel>
 
 
                 {
                   insideRegister ?
                     <div >
-                      <Button className='btn btn-success text-center'>sing up</Button>
+                      <Button onClick={handleRegister} className='btn btn-success text-center'>sing up</Button>
                       <p>Already have an account ?
                         <span>
                           <Link to={'/login'}>Login</Link>
@@ -75,6 +87,17 @@ function Auth({ insideRegister }) {
             </Col>
           </div>
         </Row>
+
+
+        <ToastContainer
+          position="top-center"
+          autoClose={2000}
+         
+          theme="colored"
+         
+        />
+
+
       </div>
     </>
   )
