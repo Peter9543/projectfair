@@ -102,3 +102,13 @@ collection must start with small letters and it must a plural word
     -framework of node js to create webserver in client-server architectures
     -steps to create server using express
         -
+
+
+jsonWebToken
+------------
+-library used for authentication in client-server request
+-used to securely tranasfer information over web
+-generate token only if login success
+    -token creation using jwt : use sign(payload,password)
+    -paylaod: it is the data that we want to store inside the token 
+    -password:can be any data that has to define in .env file

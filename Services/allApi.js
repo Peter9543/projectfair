@@ -1,7 +1,7 @@
-import commonApi from './CommonApi'
-import ServerUrl from './ServerUrl'
+import commonApi from './CommonApi';
+import SERVER_URL from './ServerUrl';
 
-// api for register user
-export const registerApi = async(reqBody)=>{
-   await commonApi("POST",`${ServerUrl}/register`,reqBody)
-}
+// API for registering a user
+export const registerApi = async (reqBody) => {
+  return await commonApi("POST", `${SERVER_URL}/register`, reqBody);
+};
