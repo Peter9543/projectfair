@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import projectImg from '../assets/project.png'
 import CardItems from '../components/CardItems';
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 
 
@@ -17,7 +18,15 @@ function Home() {
               <div style={{ textAlign: 'justify' }}>
                 <h1 className='' style={{ color: 'green' }}>Project Fair</h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi obcaecati aliquam hic? Doloremque at ratione necessitatibus eius id aliquid, eveniet nulla laboriosam. Magnam repellat eligendi numquam error, </p>
-                <Button variant="success">Start to Explore</Button>
+
+                {/* check user login , if login goto dashboard else goto login */}
+                {
+                  sessionStorage.getItem("token") ?
+                    <Link to={'/dashboard'}><Button variant="success">Manage Your Project</Button></Link>
+                    :
+                    <Link to={'/login'}><Button variant="success">Start to Explore</Button></Link>
+                }
+
               </div>
             </Col>
             <Col>
@@ -51,63 +60,63 @@ function Home() {
             <div className='d-flex row m-5'>
               <div className='col'>
                 <Card style={{ width: '14rem' }} className='text-center d-flex justify-content-center m-2 shadow'>
-                  <div className='d-flex justify-content-center mt-3' style={{  borderRadius: '50%' }}>
+                  <div className='d-flex justify-content-center mt-3' style={{ borderRadius: '50%' }}>
                     <Card.Img className='roundedCircle d-flex justify-content-center' style={{ height: '100%', width: '50%', borderRadius: '50%' }} variant="top" src="https://cdn.pixabay.com/photo/2021/02/27/16/25/woman-6055084_1280.jpg" roundedCircle />
-  
-                  </div>               
+
+                  </div>
                   <Card.Body>
                     <Card.Title>Max miller</Card.Title>
                     <p className='text-warning'>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
                     </p>
                     <Card.Text>
-                      Some quick example text to build on the card 
+                      Some quick example text to build on the card
                     </Card.Text>
-  
+
                   </Card.Body>
                 </Card>
               </div>
-
-             <div className='col'>
-                <Card style={{ width: '14rem' }} className='text-center d-flex justify-content-center m-2'>
-                  <div className='d-flex justify-content-center mt-3' style={{ height: '100%', width: '100%', borderRadius: '50%' }}>
-                    <Card.Img className='roundedCircle d-flex justify-content-center' style={{ height: '100%', width: '50%', borderRadius: '50%' }} variant="top" src="https://cdn.pixabay.com/photo/2021/02/27/16/25/woman-6055084_1280.jpg" roundedCircle />
-  
-                  </div>               
-                  <Card.Body>
-                    <Card.Title>Max miller</Card.Title>
-                    <p className='text-warning'>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    </p>
-                    <Card.Text>
-                      Some quick example text to build on the card 
-                    </Card.Text>
-  
-                  </Card.Body>
-                </Card>
-             </div>
 
               <div className='col'>
                 <Card style={{ width: '14rem' }} className='text-center d-flex justify-content-center m-2'>
                   <div className='d-flex justify-content-center mt-3' style={{ height: '100%', width: '100%', borderRadius: '50%' }}>
                     <Card.Img className='roundedCircle d-flex justify-content-center' style={{ height: '100%', width: '50%', borderRadius: '50%' }} variant="top" src="https://cdn.pixabay.com/photo/2021/02/27/16/25/woman-6055084_1280.jpg" roundedCircle />
-  
-                  </div>               
+
+                  </div>
                   <Card.Body>
                     <Card.Title>Max miller</Card.Title>
                     <p className='text-warning'>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
                     </p>
                     <Card.Text>
-                      Some quick example text to build on the card 
+                      Some quick example text to build on the card
                     </Card.Text>
-  
+
+                  </Card.Body>
+                </Card>
+              </div>
+
+              <div className='col'>
+                <Card style={{ width: '14rem' }} className='text-center d-flex justify-content-center m-2'>
+                  <div className='d-flex justify-content-center mt-3' style={{ height: '100%', width: '100%', borderRadius: '50%' }}>
+                    <Card.Img className='roundedCircle d-flex justify-content-center' style={{ height: '100%', width: '50%', borderRadius: '50%' }} variant="top" src="https://cdn.pixabay.com/photo/2021/02/27/16/25/woman-6055084_1280.jpg" roundedCircle />
+
+                  </div>
+                  <Card.Body>
+                    <Card.Title>Max miller</Card.Title>
+                    <p className='text-warning'>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                      <i class="fa-solid fa-star"></i>
+                    </p>
+                    <Card.Text>
+                      Some quick example text to build on the card
+                    </Card.Text>
+
                   </Card.Body>
                 </Card>
               </div>
@@ -115,7 +124,7 @@ function Home() {
           </div>
         </Row>
 
-        
+
       </Container>
     </>
   )

@@ -5,16 +5,22 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import { registerApi } from '../../Services/allApi';
+import { loginApi, registerApi } from '../../Services/allApi';
+import Spinner from 'react-bootstrap/Spinner';
+
+
 
 
 
 
 
 function Auth({ insideRegister }) {
+  const navigate = useNavigate()
 
   const [userDetails, setUserDetails] = useState({ username: "", email: "", password: "" })
   console.log(userDetails)
+
+  const [isLogin, setIsLogin] = useState(false)
 
   // sign up
   const handleRegister = async (e) => {
@@ -26,24 +32,68 @@ function Auth({ insideRegister }) {
         console.log('Registration result:', result);
         // toast.success("Registration successful!");
 
-        if(result.status==200){
+        if (result.status == 200) {
           toast.success(`welcome ${result?.username}...please login to explore our website`)
-          setUserDetails({username:"",email:"",password:""})
-        }else{
-          if(result.status=400){
+          setUserDetails({ username: "", email: "", password: "" })
+          navigate('/login')
+        } else {
+          if (result.status == 400) {
             toast.warning(result.response.data)
-            sestUserDetails({username:"",email:"",password:""})
+            setUserDetails({ username: "", email: "", password: "" })
+
           }
         }
       } catch (err) {
         console.error('Error during registration:', err);
-      
+
       }
     } else {
       toast.warning("Please fill out all fields completely.");
     }
   };
-  
+
+
+  // handle login
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (userDetails.email && userDetails.password) {
+      // api call
+      // handle run time error
+      try {
+        const result = await loginApi(userDetails)
+        console.log(result)
+
+        if (result.status == 200) {
+          // to store user and token details to sessionstorage (when the tab close it empty)
+          sessionStorage.setItem("user", JSON.stringify(result.data.user))
+          sessionStorage.setItem("token", result.data.token)
+          setIsLogin(true)
+
+          // only redirect to home after 500 seconds 
+          // spinner
+          setTimeout(()=>{
+            setIsLogin(false)
+            setUserDetails({ username: "", email: "", password: "" })
+            navigate('/')
+          },500)
+         
+
+        } else {
+          if (result.status == 404) {
+            toast.error(result.response.data)
+          }
+        }
+
+      } catch (err) {
+        console.log(err)
+      }
+
+
+    } else {
+      toast.warning("please enter username and password")
+    }
+  }
+
 
   return (
     <>
@@ -106,7 +156,13 @@ function Auth({ insideRegister }) {
                     :
 
                     <div style={{ color: '#007500' }}>
-                      <Button className='btn btn-success text-center'>sing in</Button>
+                      <Button onClick={handleLogin} className='btn btn-success text-center'>sing in
+                        {
+                          isLogin &&
+                          <Spinner animation="border" role="status">
+                          <span className="visually-hidden">Loading...</span>
+                        </Spinner>}
+                      </Button>
                       <p>Don't have an account yet?
                         <span>
                           <Link style={{ color: '#007500' }} to={'/register'}>Register</Link>
