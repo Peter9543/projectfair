@@ -1,19 +1,73 @@
-import React from 'react'
-import { Col, Row } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react'
+import { Col, Row, ToastContainer } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Add from './Add'
 // import Table from 'react-bootstrap/Table';
 import Edit from './Edit'
-
+import { getUserProject } from '../../Services/allApi';
+import { toast } from 'react-toastify';
+import CardItems from '../components/CardItems'
 
 
 function View() {
+
+  const [userProject,setUserProject]=useState()
+  console.log('userproject')
+  console.log(userProject)
+
+
+  useEffect(() => {
+      getUserProjectss()
+    }, [])
+  
+  
+  
+  
+    const getUserProjectss = async () => {
+  
+      const token = sessionStorage.getItem("token")
+  
+      if (token) {
+        const reqHeader = {
+          "Content-Type": "multipart/form-data",
+          "Authorization": `Beror ${token}`
+        }
+  
+  
+        try {
+  
+          const result = await getUserProject(reqHeader)
+          console.log(result.data);
+  
+          if (result.status == 200) {
+            setUserProject(result.data)
+          } else {
+            toast.error(result.response.data)
+          }
+  
+  
+        } catch (err) {
+          // console.log(err)
+        }
+      }
+    }
+
+
   return (
     <>
       <div>
         <Row className='d-flex justify-content-between align-items-between'>
           <div className='d-flex justify-content-between align-items-between mt-3'>
             <h4>All Projects</h4>
+
+            {
+              userProject?.map(proj => (
+
+                <CardItems proj={proj} />
+              ))
+            }
+            {/* <CardItems proj={}/> */}
+
             <div className='me-5'><Add /></div>
           </div>
         </Row>

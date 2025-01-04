@@ -13,3 +13,7 @@
   padding: 20px; /* Space inside the element */
   color: white; /* Text color for contrast */
 }
+
+*{
+  font-size: 14px;
+}

@@ -7,6 +7,8 @@ import img from '../assets/img.png'
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { toast, ToastContainer } from 'react-toastify';
+import { addProject } from '../../Services/allApi';
+
 
 
 function Add() {
@@ -40,7 +42,7 @@ function Add() {
 
 
   // add to db
-  const handleAddProject=()=>{
+  const handleAddProject=async()=>{
     const {title,language,github,link,overview,prjctImg}=projectDetails
 
     if(title && language && github && link && overview && prjctImg){
@@ -56,7 +58,7 @@ function Add() {
       reqBody.append("prjctImg",prjctImg)
 
       // reqHeader(content-type, token)
-
+      // token for check is user logedin
       const token=sessionStorage.getItem("token")
 
       if(token){
@@ -64,7 +66,27 @@ function Add() {
           "Content-Type":"multipart/form-data",
           "Authorization":`Beror ${token}`
         }
+
+
+        try{
+
+          const result= await addProject(reqBody,reqHeader)
+          console.log(result);
+  
+          if(result.status==200){
+            toast.success("project successfully added")
+            handleClose()
+          }else{
+            toast.error(result.response.data)
+          }
+        
+  
+        }catch(err){
+          console.log(err)
+        }
       }
+
+     
 
 
     }

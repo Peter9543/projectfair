@@ -1,14 +1,52 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
 import Button from 'react-bootstrap/Button';
 import projectImg from '../assets/project.png'
 import CardItems from '../components/CardItems';
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getHomeProject } from '../../Services/allApi';
+import { toast } from 'react-toastify';
+
+
 
 
 
 function Home() {
+
+  const navigate = useNavigate()
+
+  const [homeProj, setHomeProj] = useState()
+  console.log(homeProj)
+
+  useEffect(() => {
+    getHomeProjects()
+  }, [])
+
+  const getHomeProjects = async () => {
+    try {
+      const res = await getHomeProject()
+
+      if (res.status == 200) {
+        setHomeProj(res.data)
+      }
+
+      // console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
+  const handleProjects = () => {
+    if (sessionStorage.getItem("token")) {
+      navigate('/project')
+    } else {
+      toast.warning("please login")
+
+    }
+  }
+
   return (
     <>
       <Container >
@@ -43,11 +81,26 @@ function Home() {
           </div>
           <marquee>
             <div className='d-flex'>
-              <div>
-                <CardItems />
+              <div className='d-flex'>
+                {
+                  homeProj?.map(proj => (
+
+                    <CardItems proj={proj} />
+                  ))
+                }
               </div>
             </div>
           </marquee>
+
+          <p>
+            <button className='btn' onClick={handleProjects}>
+              <Link to={'/project'}>
+                <div className='d-flex justify-content-end m-3 me-5'>
+                  <p>View More</p>
+                </div>
+              </Link>
+            </button>
+          </p>
 
         </Row>
 

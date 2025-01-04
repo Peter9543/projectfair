@@ -112,3 +112,33 @@ jsonWebToken
     -token creation using jwt : use sign(payload,password)
     -paylaod: it is the data that we want to store inside the token 
     -password:can be any data that has to define in .env file
+
+
+MiddleWare - Node js
+--------------------
+-used to controll request respose cycle in server.before resolving server can perform any task (autherization,data 
+format changing etc..) using middleware (task eg:- authrization)
+-middleware are function with 3 arguments, they are request , response and next
+    -request  :  will give you client request
+    -response :  object will you give you response from server to client
+    -next     :  used to controll request(handle)
+
+-middleware are 2 types
+    -application specific : middleware will active for all client request 
+    -router specific : middleware will active only selectes route/path
+
+-set up authorization using middleware
+    -create a folder in server 
+    -create a js file inside the folder to define middleware
+    -import jwt
+    -token verification using jwt : verify(token,password), return a response if token verify else return an error 
+    -export jwtMiddleware and aply in specific route
+
+Multer
+--------
+-Multer is a node .js middleware for handling multipart/form-date , which is primarilly used for uplaoding files
+    stepts for creating multer middleware
+        -create js file to define middleware
+        -install multer using the command npm i router
+        -import multer in js file
+        -create 'uplaod' folder in server folder for stroring uplaod files
