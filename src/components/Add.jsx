@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -8,10 +8,13 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
 import { toast, ToastContainer } from 'react-toastify';
 import { addProject } from '../../Services/allApi';
+import { addResponseContext } from '../../context/ContextApi';
 
 
 
 function Add() {
+
+  const {addResponse,setAddresponse}=useContext(addResponseContext)
 
   const [show, setShow] = useState(false);
 
@@ -74,8 +77,9 @@ function Add() {
           console.log(result);
   
           if(result.status==200){
-            toast.success("project successfully added")
+           // toast.success("project successfully added")
             handleClose()
+            setAddresponse(result.data)
           }else{
             toast.error(result.response.data)
           }

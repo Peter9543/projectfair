@@ -55,7 +55,7 @@ function Footer() {
 
 </Row>
 
-<h6 className='text-center'>MediaPlayer 2024 @ All Rights Recived</h6>
+<h6 className='text-center'>MediaPlayer 2024 @ All Rights Received</h6>
 
 </div>
    </>
