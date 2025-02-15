@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Col, Row, ToastContainer } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Add from './Add'
@@ -6,19 +6,23 @@ import Add from './Add'
 import Edit from './Edit'
 import { getUserProject } from '../../Services/allApi';
 import { toast } from 'react-toastify';
-import CardItems from '../components/CardItems'
+import { addResponseContext, editresponseContext } from '../../context/ContextApi';
+
+
 
 
 function View() {
 
-  const [userProject,setUserProject]=useState()
+  const {addResponse,setAddResponse}=useContext(addResponseContext)
+  const {editresponse,seteditresponse}=useContext(editresponseContext)
+  const [userProject,setUserProject]=useState([])
   console.log('userproject')
   console.log(userProject)
 
 
   useEffect(() => {
       getUserProjectss()
-    }, [])
+    }, [addResponse])
   
   
   
@@ -34,7 +38,7 @@ function View() {
         }
   
   
-        try {
+       try {
   
           const result = await getUserProject(reqHeader)
           console.log(result.data);
@@ -47,7 +51,7 @@ function View() {
   
   
         } catch (err) {
-          // console.log(err)
+           console.log(err)
         }
       }
     }
@@ -57,36 +61,36 @@ function View() {
     <>
       <div>
         <Row className='d-flex justify-content-between align-items-between'>
-          <div className='d-flex justify-content-between align-items-between mt-3'>
-            <h4>All Projects</h4>
-
-            {
-              userProject?.map(proj => (
-
-                <CardItems proj={proj} />
-              ))
-            }
+          
             {/* <CardItems proj={}/> */}
 
             <div className='me-5'><Add /></div>
-          </div>
+         
         </Row>
-        <div className='d-flex w-100 justify-content-between border p-2'>
-          <div>
-            <h4> Title</h4>
-          </div>
-          <div className='d-flex w-50 justify-content-between '>
-            <div>
-              <Edit />
-            </div >
-            <div className='mt-2'>
-            <i class="fa-brands fa-github"></i>
-            </div>
-            <div className='mt-2'>
-            <i class="fa-solid fa-trash "></i>
-            </div>
-          </div>
-        </div>
+       {
+userProject?.map(proj=>(
+
+
+
+  <div className='d-flex w-100 justify-content-between border p-2'>
+  <div>
+    <h4> {proj.title}</h4>
+  </div>
+  <div className='d-flex w-50 justify-content-between '>
+    <div>
+      <Edit projec={proj} />
+    </div >
+    <div className='mt-2'>
+    <i class="fa-brands fa-github">{proj.github}</i>
+    </div>
+    <div className='mt-2'>
+    <i class="fa-solid fa-trash "></i>
+    </div>
+  </div>
+</div>
+))
+
+       }
         <Row>
 
         </Row>
